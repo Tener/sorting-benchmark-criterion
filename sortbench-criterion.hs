@@ -142,5 +142,5 @@ main =
 randomSeq :: Int -> IO [Int]
 randomSeq elNum = withSystemRandom (\gen -> replicateM elNum (uniform gen))
 sortedSeq elNum = yhcSort <$> randomSeq elNum
-reversSeq elNum = (reverse . yhcSort) <$> randomSeq elNum
+rsortedSeq elNum = (reverse . yhcSort) <$> randomSeq elNum
 
