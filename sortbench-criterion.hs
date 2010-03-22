@@ -113,10 +113,10 @@ sortByYhc2 cmp = mergeAll . sequences
 main = 
     do
 
-      let sampleSize = 100000
+      let sampleSize = 10000
           sortData' = [("rand",randomSeq)
---                       ("sort",onSorted),
---                       ("rsort",onRevsorted)
+                       ,("sort",sortedSeq)
+                       ,("rsort",rsortedSeq)
                       ]
           sortFunctions = [("id",id),
                           ("sort",sort),
@@ -134,7 +134,7 @@ main =
                     
           myoutput = S.fromList [ CSV, SVG 500 500, PDF 500 500, PNG 500 500 ]
           myplot = fromMap . M.fromList $ [ (KernelDensity,myoutput), (Timing,myoutput) ]
-          conf = defaultConfig { cfgPlot = myplot, cfgSamples = ljust 500 }
+          conf = defaultConfig { cfgPlot = myplot, cfgSamples = ljust 100 }
       withConfig conf (do env <- measureEnvironment
                           runAndAnalyse (const True) env bglobal
                       )
