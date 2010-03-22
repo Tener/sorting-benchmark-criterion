@@ -1,0 +1,12 @@
+COMPILATION:
+
+Run 'make' without arguments, and make sure you installed right libraries (in particular criterion-0.4.1.0 with Chart library (-fChart))
+
+RUNNING:
+
+Like this:
+     > mkdir bench-1
+     > cd bench-1
+     > ../sorting-criterion +RTS -M1G -sstderr
+     > ../put-in-folders.sh
+
