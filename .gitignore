@@ -2,3 +2,8 @@ _darcs/
 pomiar*/
 txt/
 *~
+/sortbench-criterion
+/sortbench.hs
+/sortbench.py
+/sorting.tar.gz
+/qsort.hs
