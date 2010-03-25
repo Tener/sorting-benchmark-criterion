@@ -26,7 +26,9 @@ import Control.Arrow
 import Data.Array.Vector ( fromU )
 
 import QsortUvector
+import QsortVector
 import SortFFI
+import SortFFI_CPP
 
 import Prelude
 
@@ -66,10 +68,11 @@ rqpart cmp x (y:ys) rle rgt r =
     	_  -> rqpart cmp x ys (y:rle) rgt r
 
 
-
+treeSort :: [Int] -> [Int]
 treeSort = concatMap (reverse . snd) . Map.toAscList
            . Map.fromListWith (++) . map (\x -> (x,[x]))
 
+countSort :: [Int] -> [Int]
 countSort = concatMap (\xn -> case xn of (x,n) -> replicate n x)
            . Map.toAscList . Map.fromListWith (+) . map (\x -> (x,1))
 
@@ -152,22 +155,37 @@ main =
 
       let sampleSize = 100000
           sortData' = [("rand",randomSeq)
---                       ,("sort",sortedSeq)
+--                      ,("sort",sortedSeq)
 --                       ,("rsort",rsortedSeq)
                       ]
           sortFunctions = [("id",id),
                            ("qsort",qsort),
---                           ("qsort_uv1",qsort_uv1),
---                           ("qsort_uv2",qsort_uv2),
---                           ("qsort_uv3",qsort_uv3),
+
+-- QsortUvector
+                           ("qsort_uv1",qsort_uv1),
+                           ("qsort_uv2",qsort_uv2),
+                           ("qsort_uv3",qsort_uv3),
                            ("qsort_uv4",qsort_uv4),
                            ("qsort_uv5",qsort_uv5),
-                           ("qsort_ffi",qsort_ffi),
+
+-- QsortVector
+                           ("qsort_v2",qsort_v2),
+                           ("qsort_v3",qsort_v3),
+                           ("qsort_v4",qsort_v4),
+                           ("qsort_v5",qsort_v5),
+
+--                           ("qsort_ffi",qsort_ffi),
+
+                           ("sort_ints_intr", sort_ints_intr),
+                           ("sort_ints_heap", sort_ints_heap),
+                           ("sort_ints_stable", sort_ints_stable),
+                           ("sort_ints_NOT", sort_ints_NOT),
                            ("sort",sort),
                            ("treeSort",treeSort),
                            ("yhcSort", yhcSort),
                            ("yhcSort2", yhcSort2),
-                           ("countSort",countSort)]
+                           ("countSort",countSort)
+                           ]
     
       putStrLn "generating data to sort"
       sortData <- sequence [ do { x <- f sampleSize ; nfIO (return x) ; return (t,x) } | (t,f) <- sortData' ]
