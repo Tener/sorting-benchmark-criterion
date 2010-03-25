@@ -1,0 +1,17 @@
+Name:                sorting
+Version:             0.1
+Synopsis:            sorting algorithms benchmark
+License:             BSD3
+License-file:        LICENSE
+Author:              Krzysztof Skrzętnicki
+Maintainer:          gtener+sortbench@gmail.com
+Stability:           Experimental
+Category:            Development
+Build-type:          Simple
+Cabal-version:       >=1.2
+Executable sortbench-criterion
+
+  Main-is: sortbench-criterion.hs
+  
+  Build-depends: vector, uvector, vector-algorithms, uvector-algorithms, criterion == 0.4.1.1, base, containers, parallel, mwc-random, random
+  
