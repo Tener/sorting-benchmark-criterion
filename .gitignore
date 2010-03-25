@@ -12,3 +12,7 @@ txt/
 /qsort.hs
 /hello
 /qsort
+/dist
+/bin/sortbench-criterion-612
+/out.log
+/hello.hs
